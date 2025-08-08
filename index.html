@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aguarde... | Cifra Correspondente Autorizado</title>
+
+    <meta http-equiv="refresh" content="5; url=bekup.html">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cifra: {
+                            orange: '#F26322',
+                            white: '#FFFFFF',
+                            black: '#000000',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans bg-gray-50 flex flex-col min-h-screen">
+
+    <main class="flex-grow flex items-center justify-center">
+        <div class="text-center p-8 max-w-lg">
+            
+            <div class="w-20 h-20 bg-cifra-orange rounded-full flex items-center justify-center text-white font-bold text-4xl mx-auto mb-6">
+                C
+            </div>
+
+            <h1 class="text-3xl md:text-4xl font-bold text-cifra-black mb-4">Seja Bem-vindo!</h1>
+            
+            <p class="text-lg text-gray-600 mb-8">
+                Você está sendo direcionado para o nosso portal seguro.
+            </p>
+            
+            <div class="bg-white p-6 rounded-lg shadow-sm">
+                <p class="text-gray-700">
+                    Aguarde, o redirecionamento será em <span id="countdown-timer" class="font-bold text-cifra-orange text-xl">5</span> segundos...
+                </p>
+                <div class="flex justify-center items-center mt-4">
+                     <i class="fas fa-spinner fa-spin text-cifra-orange text-3xl"></i>
+                </div>
+            </div>
+
+            <div class="mt-8">
+                <a href="bekup.html" id="manual-redirect-btn" class="hidden bg-cifra-orange hover:bg-orange-600 text-white font-bold py-3 px-8 rounded-full transition duration-300">
+                    Acessar o Portal Agora
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        (function() {
+            // URL de destino (sua página principal com o formulário)
+            const redirectUrl = 'bekup.html';
+
+            let secondsLeft = 5;
+            const countdownElement = document.getElementById('countdown-timer');
+            const manualRedirectBtn = document.getElementById('manual-redirect-btn');
+
+            // Atualiza o contador na tela a cada segundo
+            const interval = setInterval(() => {
+                secondsLeft--;
+                if (countdownElement) {
+                    countdownElement.textContent = secondsLeft > 0 ? secondsLeft : 0;
+                }
+
+                // Quando o tempo acabar, tenta redirecionar
+                if (secondsLeft <= 0) {
+                    clearInterval(interval);
+                    window.location.href = redirectUrl;
+
+                    // Se o redirecionamento automático falhar, mostra o botão após um breve momento
+                    setTimeout(() => {
+                        if (manualRedirectBtn) {
+                            manualRedirectBtn.classList.remove('hidden');
+                        }
+                    }, 750); // Mostra o botão após 750ms se o redirect não funcionar
+                }
+            }, 1000);
+        })();
+    </script>
+
+</body>
+</html>
